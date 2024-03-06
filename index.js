@@ -25,3 +25,18 @@ const initializeDbAndServer = async () => {
   }
 }
 initializeDbAndServer() //calling the function
+
+app.get('/', async (request, response) => {
+  const bookGetQuery = `
+  select 
+  * 
+  from 
+  book 
+  order by 
+  book_id 
+  ;
+   `
+  const bookArray = await db.all(bookGetQuery)
+
+  response.send(bookArray)
+})
